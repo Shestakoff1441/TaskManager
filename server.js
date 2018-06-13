@@ -6,20 +6,13 @@ var app = express();
 var jsonParser = bodyParser.json();
 var fs = require('fs');
 var file = __dirname + '/config.json';
-var url;
+var url = "mongodb://localhost:27017/organizerdb";
 var port;
-
-fs.readFile(file, 'utf8', function (err, data) {
-  if (err) {
-    console.log('Error: ' + err);
-    return;
-  }
+fs.readFile(file, 'utf8', function (err,data){
     data = JSON.parse(data); 
     port = data.port;
     url = data.url;
-    app.listen(port, function(){
-        console.log("Сервер ожидает подключения...");
-    });
+    app.listen(port);
 });
 
 
