@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption');
+*{
+	margin: 0;
+	padding: 0;
+	/*box-sizing: border-box;*/
+}
+body{
+	font-family: PT Sans Caption;
+}
+.container{
+	height: 100%;
+}
+td,
+th {
+	
+}
+button{
+	padding: 5px 10px;
+	background: #e6e6e6;
+	border: 1px solid #e3e3e3;
+	cursor: pointer;
+}
+#task_container{
+	width: 20%;
+	background: #514a67;
+	float: left;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+}
+#project-name{
+	font-size: 18px;
+}
+#tasks-title{
+	font-size: 16px;
+}
+.create_section, .create_task{
+	width: 100%;
+	margin-top: 5px;
+}
+.name_of_task{
+	position: relative;
+	padding-left: 23px;
+	font-size: 14px;
+	color: #e3e3e3;
+}
+.close_cross{
+	position: absolute;
+    right: 10px;
+	color: #000;
+	cursor: pointer;
+}
+.tasks{
+	text-align: left;
+}
+.name_section{
+	padding-left: 10px;
+	border-top: 1px solid #656565;
+	border-bottom: 1px solid #656565;
+}
+.name_section .fa{
+	font-size: 12px;
+}
+#calendar-box{
+	position: relative;
+	float: left;
+	width: 80%;
+}
+#date-block, #month-block, #calendar-table{
+	position: inherit;
+	float: left;
+	width: 95%;	
+    margin: 0 2.5%;
+}
+#date-block{
+	border-bottom: 1px solid #f1f1f1;
+}
+#month{
+	float: left;
+	width: 90%;
+	margin-top: 8px;
+	text-align: center;
+}
+#format-buttons{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#calendar-table{
+	float: left;
+}
+#calendar{
+	width: 100%;
+	border-collapse: collapse;
+}
+#calendar tr{
+	height: 100px;
+}
+#calendar tr#name-of-day{
+	height: 20px;
+	
+}
+#calendar tr#name-of-day th{
+	width: 119px;
+	
+}
+#calendar th{
+	padding: 3px;
+	width: 14.3%;
+	background-color: #E6E6E6;
+	border: 1px solid lightgrey;
+}
+#calendar td{
+	position: relative;
+	border: 1px solid lightgrey;
+}
+#day{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	font-size: 12px;
+	color: #b5b5b5;
+}
+.buttons{
+	text-align: left;
+	background: #514a67;
+	height: 68px;
+}
+.left-nav-month, .right-nav-month{
+	position: absolute;
+	background: transparent;
+	border: none;
+	font-size: 25px;
+	color: #AA9FCC;
+}
+.left-nav-week, .right-nav-week{
+	position: absolute;
+	background: transparent;
+	border: none;
+	font-size: 25px;
+	color: #AA9FCC;
+}
+.left-nav-day, .right-nav-day{
+	position: absolute;
+	background: transparent;
+	border: none;
+	font-size: 25px;
+	color: #AA9FCC;
+}
+.left-nav-month, .left-nav-week, .left-nav-day{
+	left: 0;
+}
+.right-nav-month, .right-nav-week, .right-nav-day{
+	right: 0;
+}
+.week_element, .day_element{
+	border: 1px solid lightgrey;
+	border-right: none;
+	border-left: none;
+	height: 25px;
+	text-align: center;
+}
+.del_section{
+	color: #000;
+	position: relative;
+	float: right;
+	cursor: pointer;
+}
+.time_field{
+	width: 10%;
+	text-align:center;
+}
+
+
+
+
+
+

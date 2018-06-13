@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Organizer</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="Dialogbox.css">
+	<script src="jquery-3.2.1.js"></script>
+	<script src="Dialogbox.js"></script>
+	<script src="makeCalendar.js"></script>
+	<script src="weekCalendar.js"></script>
+	<script src="dayCalendar.js"></script>
+	<script src="todayCalendar.js"></script>
+	<script src="scripts.js"></script>
+	<script src="https://use.fontawesome.com/1245c81752.js"></script>
+	
+</head>
+
+<body>
+	<div class="container">
+		<div id="task_container">
+			<div id="project-name">ORGANIZER</div>			
+			<div class="buttons">			
+				<button class="create_section">Create category&nbsp;<i class="fa fa-plus"></i></button>
+				<button class="create_task">Create task&nbsp;<i class="fa fa-plus"></i></button>
+			</div>
+			<div id="tasks-title"><span>TASKS</span></div>
+
+			<div class="tasks">
+
+			</div>
+
+		</div>
+		
+	<div id="calendar-box">
+		<div id="date-block">
+			<button id="today">Today</button>
+			<span id="date-now"></span>
+			<div id="format-buttons">
+				<button id="day-format">Day</button>
+				<button id="week-format">Week</button>
+				<button id="month-format">Month</button>
+			</div>
+					
+		</div>
+		<div id="month-block">
+			<button class="left-nav-day"><i class="fa fa-chevron-circle-left"></i></button>
+			<button class="left-nav-week"><i class="fa fa-chevron-circle-left"></i></button>
+			<button class="left-nav-month"><i class="fa fa-chevron-circle-left"></i></button>	
+			<span id="month"></span>
+			<button class="right-nav-day"><i class="fa fa-chevron-circle-right"></i></button>
+			<button class="right-nav-week"><i class="fa fa-chevron-circle-right"></i></button>
+			<button class="right-nav-month"><i class="fa fa-chevron-circle-right"></i></button>
+			
+		</div>
+				
+		<div id="calendar-table"></div>
+		</div>	
+	</div>
+	
+	
+
+</body>
+</html>
+
+
