@@ -34,8 +34,6 @@ $(document).ready(function () {
 		hasCloseOverlay: false,
 	});
 	
-
-
 	$create_task_button.dialogbox({
 		width: "60%",
 		prvDft: true,
@@ -67,8 +65,6 @@ $(document).ready(function () {
 
 	});
 	
-
-
 	function createDeleteCategoryButton(){
 		var $del_section = $(".del_section[data-event = '']");
 		$del_section.dialogbox({
@@ -94,12 +90,13 @@ $(document).ready(function () {
 		})
 	}
 
-
 	function addCategory(tasks){
-		return "<div class ='section_of_task' data-id = '"+tasks._id+"'>" +"<h4 class = 'name_section' data-color = '"+tasks.task_color+"'>" + tasks.name+"</h4>"+"<span class='del_section' data-event = '' data-id = '"+tasks._id+"'>X</span>"+"</div>";
+		return "<div class ='section_of_task' data-id = '"+tasks._id+"'>"
+		+"<h4 class = 'name_section' data-color = '"+tasks.task_color+"'>"
+		+ tasks.name+"</h4>"+"<span class='del_section' data-event = '' data-id = '"+tasks._id+"'>X</span>"+"</div>";
 	}
 
-	function createCategory() {
+	function createCategory(){
 	    $.ajax({
 	        url: "api/tasks",
 	        contentType: "application/json",
@@ -119,8 +116,7 @@ $(document).ready(function () {
 	    })
 	}
 
-
-	function getCategory() {
+	function getCategory(){
 	    $.ajax({
 	        url: "/api/tasks",
 	        type: "GET",
@@ -150,7 +146,7 @@ $(document).ready(function () {
 	    })
 	}
 
-	function isExistCategory() {
+	function isExistCategory(){
 		var task = $(".tasks").find("div");
 		if (task.length == 0) {
 			$create_task_button.attr('disabled',true);
@@ -161,9 +157,10 @@ $(document).ready(function () {
 	}
 
 	function addTask(undertask_name,undertask_id,undertask_date,undertask_time,undertask_color){
-		return "<div class ='name_of_task' data-date = '"+undertask_date+"' data-time = '"+undertask_time+"' data-id = '"+undertask_id+"'>"+undertask_name +"<span> "+undertask_date+"</span>"+"<span class = 'close_cross' data-id = '"+undertask_id+"'><i class='fa fa-close'></i></span>"+"</div>";		
+		return "<div class ='name_of_task' data-date = '"+undertask_date+"' data-time = '"
+		+undertask_time+"' data-id = '"+undertask_id+"'>"+undertask_name +"<span>"
+		+undertask_date+"</span>"+"<span class = 'close_cross' data-id = '"+undertask_id+"'><i class='fa fa-close'></i></span>"+"</div>";		
 	}
-
 
 	function createTask() {
 		 $.ajax({
@@ -180,8 +177,8 @@ $(document).ready(function () {
                 time_value2 	  :$(".time_picker2").val(),
                 task_color 		  :$("h4:contains("+$(".choice_section option:selected").text()+")").attr("data-color")
             }),
-            success: function (undertask) {
-				showNewTasks(undertask)
+            success: function (undertask){
+				showNewTasks(undertask);
 				createDeleteTaskButton();
        		}
         })
@@ -193,18 +190,18 @@ $(document).ready(function () {
 	            url: "/api/underTasks",
 	            type: "GET",
 	            contentType: "application/json",
-	            success: function (undertask) {
+	            success: function (undertask){
 	                var task = '';
-	                $.each(undertask, function (index, undertask) {
+	                $.each(undertask, function (index, undertask){
 	                	createDeleteTaskButton();
-	                	addToSideMenu(undertask)
+	                	addToSideMenu(undertask);
 	                })
 	            }
 	        });
 		},50)
 	}
 
-	function deleteTask(id) {
+	function deleteTask(id){
         $.ajax({
             url: "api/underTasks/"+id,
             contentType: "application/json",
@@ -229,22 +226,23 @@ $(document).ready(function () {
         })
     }
 
-function addToSideMenu(undertask){
-	setTimeout(function(){
-		var task_section_name = $(".tasks").find(".name_section");
-			var task_section = $(".tasks").find(".section_of_task");
-			for (var i = 0; i < task_section.length; i++){
-				if (task_section_name[i].textContent == undertask.value) {            		
-		            $(".tasks .section_of_task")[i].innerHTML += addTask(undertask.name_task,undertask._id,undertask.dater,undertask.timer);
-		        }
-		    }     
-	},400)
-}
+	function addToSideMenu(undertask){
+		setTimeout(function(){
+			var task_section_name = $(".tasks").find(".name_section");
+				var task_section = $(".tasks").find(".section_of_task");
+				for (var i = 0; i < task_section.length; i++){
+					if (task_section_name[i].textContent == undertask.value) {            		
+			            $(".tasks .section_of_task")[i].innerHTML += addTask(undertask.name_task,undertask._id,undertask.dater,undertask.timer);
+			        }
+			    }     
+		},400)
+	}
 
 	function showNewTasks(undertask){
 		setTimeout(function(){
 			addToSideMenu(undertask)
-            $(".td_day[data-date='"+undertask.dater+"']").append("<div class='circle' style=width:10px;height:10px;padding:3px;border-radius:50%;background:"+undertask.color+" data-time = '"+undertask.timer+"' data-id = '"+undertask._id+"' data-date="+undertask.dater+"></div>");    
+            $(".td_day[data-date='"+undertask.dater+"']").append("<div class='circle' style=width:10px;height:10px;padding:3px;border-radius:50%;background:"
+            +undertask.color+" data-time = '"+undertask.timer+"' data-id = '"+undertask._id+"' data-date="+undertask.dater+"></div>");    
             $("#week_td[data-date='"+undertask.dater+"']").css("background",undertask.color);
             $("#week_td[data-date='"+undertask.dater+"']").attr("data-id",undertask._id);
 				var now_day = $(".task_field");
@@ -263,11 +261,6 @@ function addToSideMenu(undertask){
 		},550)			
 	}
 
-
-	
-	
-
-    
 	function createDeleteTaskButton(){
 		$("body").on("click",".close_cross",function(e){
 		var id = this.getAttribute("data-id");
@@ -277,6 +270,4 @@ function addToSideMenu(undertask){
     getCategory();
     getTask();
 	isExistCategory();
-
-
 });

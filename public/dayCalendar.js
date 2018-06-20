@@ -1,28 +1,16 @@
 "use strict";
 $(document).ready(function(){
-	var week_format = $("#week-format");
-	var month_format = $("#month-format");
-	var day_format = $("#day-format");
-	var left_nav_month = $(".left-nav-month");
-	var left_nav_week = $(".left-nav-week");
-	var left_nav_day = $(".left-nav-day");
-	var right_nav_month = $(".right-nav-month");
-	var right_nav_week = $(".right-nav-week");
-	var right_nav_day = $(".right-nav-day");
 	var Name_of_Day = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	var Name_of_Month = window.dataobject.name_month;
-	var hours = 1;
-	var minutes = "00";
 	var date = window.dataobject.dt;
 	var month = date.getMonth();
 	var year = date.getFullYear();
 	var number = date.getDate();
-	var temp_time = 1;
+
 
 	function drawDate(){
 		$("#month").text(Name_of_Month[date.getMonth()]+" "+date.getDate()+" "+Name_of_Day[date.getDay()]);
 	}	
-
 
 	function makeDayCalendar(element,temp_date){
 		setTimeout(function(){
@@ -30,7 +18,7 @@ $(document).ready(function(){
 	            url: "/api/underTasks",
 	            type: "GET",
 	            contentType: "application/json",
-	            success: function (undertask) {
+	            success: function (undertask){
 					for(var i = 0; i < undertask.length; i++){
 						var now_day = $(".task_field");
 						if(undertask[i].dater == now_day.attr("data-date")){
@@ -43,13 +31,12 @@ $(document).ready(function(){
 										j++;
 									}
 								}
-							}		
+							}	
 						}
 					}		
 	            }     
 	        });		    
 		},500);
-
 
 		setTimeout(function(){
 			var el = document.getElementById(element);
@@ -62,25 +49,24 @@ $(document).ready(function(){
 			drawDate();
 			table+="<td class='time_field'>";
 			for(var i = 0; i < 24;i++){ 
-				if(hours < 10){
-					hours = "0" + hours;
+				if(window.dataobject.dayCalendar.hours < 10){
+					window.dataobject.dayCalendar.hours = "0" + window.dataobject.dayCalendar.hours;
 				}
-				table+="<div class='day_element data'>"+hours+":"+minutes+"</div>";
-				hours++;
-				if(hours==24){
-					hours = 0;
+				table+="<div class='day_element'>"+window.dataobject.dayCalendar.hours+":"+window.dataobject.dayCalendar.minutes+"</div>";
+				window.dataobject.dayCalendar.hours++;
+				if(window.dataobject.dayCalendar.hours == 24){
+					window.dataobject.dayCalendar.hours = 0;
 				}
 			}
 			table+="</td>";
 			table+="<td class='task_field' data-date='"+new Date(date.getFullYear(),date.getMonth(),date.getDate() + 1).toISOString().slice(0,10)+"'>";
 			for(var i = 1; i <=24;i++){
-				if(temp_time == 24) temp_time = 0;
-				if(temp_time < 10){
-					temp_time = "0"+temp_time;
+				if(window.dataobject.dayCalendar.temp_time == 24) window.dataobject.dayCalendar.temp_time = 0;
+				if(window.dataobject.dayCalendar.temp_time < 10){
+					window.dataobject.dayCalendar.temp_time = "0"+window.dataobject.dayCalendar.temp_time;
 				}
-				table+="<div class= 'day_element' data-hours ='"+temp_time+":"+minutes+"' ></div>";
-				temp_time++;
-
+				table+="<div class= 'day_element' data-hours ='"+window.dataobject.dayCalendar.temp_time+":"+window.dataobject.dayCalendar.minutes+"' ></div>";
+				window.dataobject.dayCalendar.temp_time++;
 			}
 			table+="</table>";
 			el.innerHTML = table;
@@ -94,6 +80,7 @@ $(document).ready(function(){
 		drawDate();
 		makeDayCalendar("calendar-table",date);
 	}
+
 	function change_day_prev(){
 		date = window.dataobject.dt;
 		date.setDate(date.getDate() - 1);
@@ -101,27 +88,25 @@ $(document).ready(function(){
 		makeDayCalendar("calendar-table",date);
 	}
 	
-
-
-	 function dayCalendarCall(){
-		right_nav_month.css("visibility","hidden");
-		left_nav_month.css("visibility","hidden");
-		left_nav_week.css("visibility","hidden");
-		right_nav_week.css("visibility","hidden");
-		right_nav_day.css("visibility","visible");	
-		left_nav_day.css("visibility","visible");
+	function dayCalendarCall(){
+		window.dataobject.elements.right_nav_month.css("visibility","hidden");
+		window.dataobject.elements.left_nav_month.css("visibility","hidden");
+		window.dataobject.elements.left_nav_week.css("visibility","hidden");
+		window.dataobject.elements.right_nav_week.css("visibility","hidden");
+		window.dataobject.elements.right_nav_day.css("visibility","visible");	
+		window.dataobject.elements.left_nav_day.css("visibility","visible");
 		date = window.dataobject.dt;
 		month = date.getMonth();
 		year = date.getFullYear();
 		date.setDate(new Date().getDate());
 		makeDayCalendar("calendar-table",new Date(year,month,new Date().getDate()));
-		month_format.attr('disabled',false);
-		week_format.attr('disabled',false);
-		day_format.attr('disabled',true);
+		window.dataobject.elements.month_format.attr('disabled',false);
+		window.dataobject.elements.week_format.attr('disabled',false);
+		window.dataobject.elements.day_format.attr('disabled',true);
 		$("#calendar-box").attr("data-format","day");
 	}
-	day_format.on("click",dayCalendarCall);
-	left_nav_day.on("click",change_day_prev);
-	right_nav_day.on("click",change_day_next);
+	window.dataobject.elements.day_format.on("click",dayCalendarCall);
+	window.dataobject.elements.left_nav_day.on("click",change_day_prev);
+	window.dataobject.elements.right_nav_day.on("click",change_day_next);
 
 })

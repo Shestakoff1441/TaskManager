@@ -6,12 +6,12 @@ var app = express();
 var jsonParser = bodyParser.json();
 var fs = require('fs');
 var file = __dirname + '/config.json';
-var url = "mongodb://localhost:27017/organizerdb";
+var url; /*= "mongodb://localhost:27017/organizerdb"*/;
 var port;
 fs.readFile(file, 'utf8', function (err,data){
     data = JSON.parse(data); 
-    port = data.port;
-    url = data.url;
+    port = data.server.port;
+    url = 'mongodb://'+data.mongodb.url+":"+data.mongodb.port+"/"+data.mongodb.dbname+'';
     app.listen(port);
 });
 
@@ -94,7 +94,6 @@ app.delete("/api/underTasks/:id", function(req, res){
         });
     });
 });
-
 
 app.delete("/api/tasks/:id", function(req, res){
     var id = new objectId(req.params.id);

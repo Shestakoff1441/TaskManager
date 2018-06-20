@@ -2,7 +2,6 @@
 *{
 	margin: 0;
 	padding: 0;
-	/*box-sizing: border-box;*/
 }
 body{
 	font-family: PT Sans Caption;
@@ -101,8 +100,7 @@ button{
 	
 }
 #calendar tr#name-of-day th{
-	width: 119px;
-	
+	width: 119px;	
 }
 #calendar th{
 	padding: 3px;

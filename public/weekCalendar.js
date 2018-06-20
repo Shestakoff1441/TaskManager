@@ -1,30 +1,16 @@
 $(document).ready(function(){
-	var week_format = $("#week-format");
-	var month_format = $("#month-format");
-	var day_format = $("#day-format");
-	var left_nav_month = $(".left-nav-month");
-	var left_nav_week = $(".left-nav-week");
-	var left_nav_day = $(".left-nav-day");
-	var right_nav_month = $(".right-nav-month");
-	var right_nav_week = $(".right-nav-week");
-	var right_nav_day = $(".right-nav-day");
 	var Name_of_Day = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-	var short_name_mon = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-	var hours = 8;
-	var minutes = "00";	
-	var temp_time = 8;
+	var short_name_month = window.dataobject.short_name_month;
 	var date = window.dataobject.dt;
 	var calendarArr=[];
-	var calendarWeekDate = [];
-
-
+	var calendarWeekDate =[];
 	
 	function drawDate(){
 		date.setDate(date.getDate() - 6);
-		var str1 = short_name_mon[date.getMonth()]+" "+calendarArr[0]+" - ";
+		var str1 = short_name_month[date.getMonth()]+" "+calendarArr[0]+" - ";
 		date.setDate(date.getDate() + 6);	
-		var str2 = short_name_mon[date.getMonth()]+" "+calendarArr[6];
-		var str3 = str1 + str2 ;
+		var str2 = short_name_month[date.getMonth()]+" "+calendarArr[6];
+		var str3 = str1 + str2;
 		$("#month").text(str3);
 	}
 
@@ -57,11 +43,6 @@ $(document).ready(function(){
 		}
 		drawDate()
 	}
-
-
-
-
-
 
 	function makeWeekCalendar(element){
 		setTimeout(function(){
@@ -99,13 +80,13 @@ $(document).ready(function(){
 			table+="<tr>";
 			table+="<td>";
 			for(var i = 0; i < 24;i++){
-				if(hours < 10){
-					hours = "0" + hours;
+				if(window.dataobject.weekCalendar.hours < 10){
+					window.dataobject.weekCalendar.hours = "0" + window.dataobject.weekCalendar.hours;
 				}
-				table+="<div class='week_element'>"+hours+"."+minutes+"</div>";
-				hours++;
-				if(hours==24){
-					hours = 0;
+				table+="<div class='week_element'>"+window.dataobject.weekCalendar.hours+"."+window.dataobject.weekCalendar.minutes+"</div>";
+				window.dataobject.weekCalendar.hours++;
+				if(window.dataobject.weekCalendar.hours==24){
+					window.dataobject.weekCalendar.hours = 0;
 				}
 			}
 			table+="</td>";
@@ -114,9 +95,9 @@ $(document).ready(function(){
 				table+="<td id = 'week_td'data-index ="+ i +" data-date ='"+calendarWeekDate[i]+"'>";
 				
 				for(var j = 0; j < 24;j++){
-					if(temp_time == 24) temp_time = 0;
-					table+="<div class='week_element' data-hours ='"+(temp_time)+"'>" +"</div>";
-					temp_time++;
+					if(window.dataobject.weekCalendar.temp_time == 24) window.dataobject.weekCalendar.temp_time = 0;
+					table+="<div class='week_element' data-hours ='"+(window.dataobject.weekCalendar.temp_time)+"'>" +"</div>";
+					window.dataobject.weekCalendar.temp_time++;
 				}
 				table+="</td>";
 			}
@@ -127,11 +108,11 @@ $(document).ready(function(){
 		},400)
 	};
 	
-	right_nav_week.on("click",function(){
+	window.dataobject.elements.right_nav_week.on("click",function(){
 		makeWeekCalendar("calendar-table", change_data_next());
 	});
 
-	left_nav_week.on("click",function(){		
+	window.dataobject.elements.left_nav_week.on("click",function(){		
 		makeWeekCalendar("calendar-table", change_data_prev());
 	});
 
@@ -139,21 +120,20 @@ $(document).ready(function(){
 		makeWeekCalendar("calendar-table",makeCalendarArray());
 	}
 	
-	
 	function weekCalendarCall(e){
 		date = window.dataobject.dt;
-		right_nav_month.css("visibility","hidden");
-		right_nav_day.css("visibility","hidden");
-		left_nav_month.css("visibility","hidden");
-		left_nav_day.css("visibility","hidden");
-		right_nav_week.css("visibility","visible");
-		left_nav_week.css("visibility","visible");
+		window.dataobject.elements.right_nav_month.css("visibility","hidden");
+		window.dataobject.elements.right_nav_day.css("visibility","hidden");
+		window.dataobject.elements.left_nav_month.css("visibility","hidden");
+		window.dataobject.elements.left_nav_day.css("visibility","hidden");
+		window.dataobject.elements.right_nav_week.css("visibility","visible");
+		window.dataobject.elements.left_nav_week.css("visibility","visible");
 		makeWeekCalendar("calendar-table",makeCalendarArray());
-		month_format.attr('disabled',false);
-		week_format.attr('disabled',true);
-		day_format.attr('disabled',false);
+		window.dataobject.elements.month_format.attr('disabled',false);
+		window.dataobject.elements.week_format.attr('disabled',true);
+		window.dataobject.elements.day_format.attr('disabled',false);
 		$("#calendar-box").attr("data-format","week");
 	}
 	
-	week_format.on("click",weekCalendarCall);
+	window.dataobject.elements.week_format.on("click",weekCalendarCall);
 })

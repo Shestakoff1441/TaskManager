@@ -1,10 +1,6 @@
 "use strict";
 $(document).ready(function(){
 	var $today = $("#today");
-	var td_count = 0;
-	var day = 0;
-	var date = window.dataobject.dt;
-
 	$today.on("click",function(){
 		if($("#calendar-box").attr("data-format") == "month"){
 			var Name_of_Month = window.dataobject.name_month;
@@ -14,13 +10,10 @@ $(document).ready(function(){
 			var dt = window.dataobject.dt;
 			var month = dt.getMonth();
 			var year = dt.getFullYear();
-			var number = dt.getDate();
 			window.dataobject.dt = new Date(year,month);
-
 			var startM = new Date(year,month);
 			startM = startM.getDay();
 			var data_color_array=[];
-			
 			dt.setDate(1);
 			mFunc();
 		}
@@ -39,8 +32,7 @@ $(document).ready(function(){
 			var number = new Date().getDate();
 			date = new Date(year,month,number);
 			window.dataobject.dt = date;
-			dFunc("calendar-table",date)
-
+			dFunc("calendar-table",date);
 		}
 	})
 })
